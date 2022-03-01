@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
+using MySql.Data.MySqlClient;
+using NetCoreAPIMySql.Data;
 
 namespace DemoDashboardDevice
 {
@@ -23,16 +26,32 @@ namespace DemoDashboardDevice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //MySQL connection
+            var mySqlConnection = new MySqlConnection(Configuration.GetConnectionString("SQLConnection"));
+            services.AddSingleton(mySqlConnection);
+            //Enable Cors
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+            //JSON Serializer
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
             services.AddControllersWithViews();
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Enable Cors
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
