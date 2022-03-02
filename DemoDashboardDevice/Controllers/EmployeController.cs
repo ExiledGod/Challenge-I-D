@@ -7,6 +7,7 @@ using System.Data;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System;
 
 namespace DemoDashboardDevice.Controllers
 {
@@ -40,6 +41,8 @@ namespace DemoDashboardDevice.Controllers
                 return BadRequest(); //devuelve estado 400
             if(!ModelState.IsValid)
                 return BadRequest(ModelState); //en caso de que un campo requerido o validador no se cumpla
+            
+            //employe.img_name = DateTime.Now.ToString();
             var created = await _employe_repository.InsertEmployes(employe);
             return Created("created",created); // estado 201
         }
@@ -63,9 +66,14 @@ namespace DemoDashboardDevice.Controllers
         /*
         [Route("/Savefile")]
         [HttpPost]
-        public Task<IActionResult> SaveFile([FromBody] employes employe)
+        public Task<IActionResult> SaveFile(employes employe)
         {
             employes img = JsonConvert.DeserializeObject<employes>(employe.img_ref_validator);
+            using (var target = new MemoryStream())
+            {
+                employe.CopyTo(target);
+                
+            }
             return 0;
         }
         */

@@ -76,7 +76,7 @@ namespace DemoDashboardDevice
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employe}/{action=Index}/{id?}");
             });
         }
     }

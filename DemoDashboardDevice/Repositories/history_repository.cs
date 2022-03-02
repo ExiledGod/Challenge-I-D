@@ -25,7 +25,7 @@ namespace DemoDashboardDevice.Repositories
         public async Task<bool> DeleteHistory(register register)
         {
             var db = dbConnection();
-            var sql = @"Select from history where id = @Id";
+            var sql = @"delete from history where id = @Id";
             var result = await db.ExecuteAsync(sql, new { Id = register.id });
             return result > 0;
         }
