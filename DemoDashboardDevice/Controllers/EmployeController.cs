@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace DemoDashboardDevice.Controllers
 {
@@ -58,6 +60,15 @@ namespace DemoDashboardDevice.Controllers
             await _employe_repository.DeleteEmployes(new employes() { id = id });
             return NoContent();
         }
+        /*
+        [Route("/Savefile")]
+        [HttpPost]
+        public Task<IActionResult> SaveFile([FromBody] employes employe)
+        {
+            employes img = JsonConvert.DeserializeObject<employes>(employe.img_ref_validator);
+            return 0;
+        }
+        */
 
     }
 }

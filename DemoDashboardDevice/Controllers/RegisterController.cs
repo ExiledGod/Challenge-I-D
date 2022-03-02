@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace DemoDashboardDevice.Controllers
 {
+    [Route("/[controller]")]
+    [ApiController]
     public class RegisterController : Controller
     {
         public IActionResult Index()

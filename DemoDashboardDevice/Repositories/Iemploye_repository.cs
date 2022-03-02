@@ -15,6 +15,8 @@ namespace DemoDashboardDevice.Repositories
         Task<bool> InsertEmployes(employes employe);
         Task<bool> UpdateEmployes(employes employe);
         Task<bool> DeleteEmployes(employes employe);
+        Task<employes> Save(employes employes);
+        Task<employes> GetSaveEmploye(int id);
 
     }
 }

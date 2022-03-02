@@ -25,7 +25,7 @@ namespace DemoDashboardDevice.Repositories
         public async Task<bool> DeleteEmployes(employes employe)
         {
             var db = dbConnection();
-            var sql = @"Select from employe where id = @Id";
+            var sql = @"delete from employe where id = @Id";
             var result = await db.ExecuteAsync(sql, new { Id = employe.id });
             return result > 0;
         }
@@ -63,6 +63,16 @@ namespace DemoDashboardDevice.Repositories
                         where id = @id)";
             var result = await db.ExecuteAsync(sql, new { employe.name, employe.rut, employe.company_name, employe.img_name, employe.img_ref_validator, employe.id });
             return result > 0;
+        }
+
+        public Task<employes> Save(employes employes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<employes> GetSaveEmploye(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
