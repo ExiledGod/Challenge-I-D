@@ -1,6 +1,5 @@
-﻿using DemoDashboardDevice.Data.Repositories;
+﻿using DemoDashboardDevice.Repositories;
 using DemoDashboardDevice.Models;
-using DemoDashboardDevice.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;

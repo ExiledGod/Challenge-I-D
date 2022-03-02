@@ -18,7 +18,6 @@ namespace DemoDashboardDevice.Controllers
         {
             this.configuration = configuration;
         }
-        [HttpGet]
         
     }
 }

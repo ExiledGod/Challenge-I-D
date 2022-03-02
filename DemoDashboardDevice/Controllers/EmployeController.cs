@@ -1,4 +1,4 @@
-﻿using DemoDashboardDevice.Data.Repositories;
+﻿using DemoDashboardDevice.Repositories;
 using DemoDashboardDevice.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -58,5 +58,6 @@ namespace DemoDashboardDevice.Controllers
             await _employe_repository.DeleteEmployes(new employes() { id = id });
             return NoContent();
         }
+
     }
 }

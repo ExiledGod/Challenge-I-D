@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using MySql.Data.MySqlClient;
-using DemoDashboardDevice.Data.Repositories;
 using DemoDashboardDevice.Repositories;
 
 namespace DemoDashboardDevice
@@ -28,8 +27,8 @@ namespace DemoDashboardDevice
         public void ConfigureServices(IServiceCollection services)
         {
             //MySQL connection
-            var mySqlConnection = new MySqlConnection(Configuration.GetConnectionString("SQLConnection"));
-            services.AddSingleton(mySqlConnection);
+            var mySQLConnection = new MySQLConfiguration(Configuration.GetConnectionString("SQLConnection"));
+            services.AddSingleton(mySQLConnection);
             //Repositorios con conexion a la db
             services.AddScoped<Iemploye_repository, employe_repository>();
             services.AddScoped<Ihistory_repository, history_repository>();

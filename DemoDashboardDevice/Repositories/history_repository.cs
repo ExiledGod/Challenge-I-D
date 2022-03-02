@@ -1,6 +1,5 @@
 ﻿using DemoDashboardDevice.Models;
-using DemoDashboardDevice.Data;
-using DemoDashboardDevice.Data.Repositories;
+using DemoDashboardDevice;
 using System;
 using System.Collections.Generic;
 using System.Linq;

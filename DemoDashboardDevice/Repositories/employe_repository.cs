@@ -1,6 +1,5 @@
 ﻿using DemoDashboardDevice.Models;
-using DemoDashboardDevice.Data;
-using DemoDashboardDevice.Data.Repositories;
+using DemoDashboardDevice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +19,7 @@ namespace DemoDashboardDevice.Repositories
         }
         protected MySqlConnection dbConnection()
         {
-            return new MySqlConnection( _connectionString.ConnectionString);
+            return new MySqlConnection(_connectionString.ConnectionString);
         }
 
         public async Task<bool> DeleteEmployes(employes employe)
@@ -35,7 +34,7 @@ namespace DemoDashboardDevice.Repositories
         {
             var db = dbConnection();
             var sql = @"Select * from employe";
-            return await db.QueryAsync<employes>(sql,new { });
+            return await db.QueryAsync<employes>(sql, new { });
         }
 
         public async Task<employes> GetEmployesDetails(int id)

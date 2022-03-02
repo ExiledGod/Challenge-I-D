@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DemoDashboardDevice.Data.Repositories
+namespace DemoDashboardDevice.Repositories
 {
     public interface Iemploye_repository
     {
