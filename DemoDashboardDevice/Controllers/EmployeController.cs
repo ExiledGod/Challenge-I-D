@@ -66,17 +66,30 @@ namespace DemoDashboardDevice.Controllers
         /*
         [Route("/Savefile")]
         [HttpPost]
-        public Task<IActionResult> SaveFile(employes employe)
+        public Task<IActionResult> SaveFile(HttpPostAttribute Attachment)
         {
-            employes img = JsonConvert.DeserializeObject<employes>(employe.img_ref_validator);
-            using (var target = new MemoryStream())
+            if (Attachment != null)
             {
-                employe.CopyTo(target);
-                
+                try //attempt to save file to file system
+                {
+                    var fileName = Path.GetFileName(Attachment.FileName);
+                    //path as parameter can be changed to any desired valid path
+                    var path = Path.Combine((@"C:\Images"), fileName);
+                    Attachment.SaveAs(path);
+                    return FileUploadState.Uploaded;
+                }
+                catch //implement your own error handling here 
+                {
+                    //error handling
+                    return FileUploadState.Failed;
+                }
             }
-            return 0;
+            else
+            {
+                return FileUploadState.NoFileSelected;
+            }
         }
         */
-
+        
     }
 }
