@@ -10,7 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using MySql.Data.MySqlClient;
-using NetCoreAPIMySql.Data;
+using DemoDashboardDevice.Data.Repositories;
+using DemoDashboardDevice.Repositories;
 
 namespace DemoDashboardDevice
 {
@@ -29,6 +30,9 @@ namespace DemoDashboardDevice
             //MySQL connection
             var mySqlConnection = new MySqlConnection(Configuration.GetConnectionString("SQLConnection"));
             services.AddSingleton(mySqlConnection);
+            //Repositorios con conexion a la db
+            services.AddScoped<Iemploye_repository, employe_repository>();
+            services.AddScoped<Ihistory_repository, history_repository>();
             //Enable Cors
             services.AddCors(c =>
             {

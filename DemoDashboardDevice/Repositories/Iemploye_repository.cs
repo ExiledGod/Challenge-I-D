@@ -6,15 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace NetCoreAPIMySQL.Data.Repositories
+namespace DemoDashboardDevice.Data.Repositories
 {
-    public interface employe_repository
+    public interface Iemploye_repository
     {
         Task<IEnumerable<employes>> GetAllemployes();
-        Task<employes> GetEmployesDetails();
-        Task<bool> InsertEmployes();
-        Task<bool> UpdateEmployes();
-        Task<bool> DeleteEmployes();
+        Task<employes> GetEmployesDetails(int id);
+        Task<bool> InsertEmployes(employes employe);
+        Task<bool> UpdateEmployes(employes employe);
+        Task<bool> DeleteEmployes(employes employe);
 
     }
 }

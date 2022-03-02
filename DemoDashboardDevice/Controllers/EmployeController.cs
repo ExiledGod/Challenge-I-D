@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DemoDashboardDevice.Data.Repositories;
+using DemoDashboardDevice.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Threading.Tasks;
+
 namespace DemoDashboardDevice.Controllers
 {
     [Route("/[controller]")]
@@ -12,32 +16,47 @@ namespace DemoDashboardDevice.Controllers
         {
             return View();
         }
-        private readonly IConfiguration configuration;
-        public EmployeController(IConfiguration configuration)
+        private readonly Iemploye_repository _employe_repository;
+        public EmployeController(Iemploye_repository employe_repository)
         {
-            this.configuration = configuration;
+            _employe_repository = employe_repository;
         }
         [HttpGet]
-        public JsonResult Get()
+        public async Task<IActionResult> GetAllemployes()
         {
-            string query = @"select name from employe";
+            return Ok(await _employe_repository.GetAllemployes());
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmployesDetails(int id)
+        {
+            return Ok(await _employe_repository.GetEmployesDetails(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Insertemployes([FromBody] employes employe)
+        {
+            if (employe == null)
+                return BadRequest(); //devuelve estado 400
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState); //en caso de que un campo requerido o validador no se cumpla
+            var created = await _employe_repository.InsertEmployes(employe);
+            return Created("created",created); // estado 201
+        }
+        [HttpPut]
+        public async Task<IActionResult> Updateemployes([FromBody] employes employe)
+        {
+            if (employe == null)
+                return BadRequest();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            DataTable table = new DataTable();
-            string sqlDataSource = this.configuration.GetConnectionString("employeApp");
-            MySqlDataReader myReader;
-            using (MySqlConnection mySqlConnection = new MySqlConnection(sqlDataSource))
-            {
-                mySqlConnection.Open();
-                using (MySqlCommand mycommand = new MySqlCommand(query, mySqlConnection))
-                {
-                    myReader = mycommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    mySqlConnection.Close();
-                }
-            }
-            return new JsonResult(table);
+            await _employe_repository.UpdateEmployes(employe);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deleteemployes(int id)
+        {
+            await _employe_repository.DeleteEmployes(new employes() { id = id });
+            return NoContent();
         }
     }
 }

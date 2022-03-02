@@ -6,7 +6,7 @@ namespace DemoDashboardDevice.Models
 {
     public class register
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public int employe_id { get; set; }
         public DateTime entry { get; set; }
         public DateTime endturn { get; set; }

@@ -6,10 +6,10 @@ namespace DemoDashboardDevice.Models
 {
     public class employes
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
         public string rut { get; set; }
-        public int company_id { get; set; }
+        public string company_name { get; set; }
         public string img_name { get; set; }
         public string img_ref_validator { get; set; } 
     }

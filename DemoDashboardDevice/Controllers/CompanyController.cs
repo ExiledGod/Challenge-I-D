@@ -19,31 +19,6 @@ namespace DemoDashboardDevice.Controllers
             this.configuration = configuration;
         }
         [HttpGet]
-        public JsonResult Get()
-        {
-            string query = @"select name from company";
-
-            DataTable table = new DataTable();
-            string sqlDataSource = this.configuration.GetConnectionString("employeApp");
-            MySqlDataReader myReader;
-            using (MySqlConnection mySqlConnection = new MySqlConnection(sqlDataSource))
-            {
-                mySqlConnection.Open();
-                using (MySqlCommand mycommand = new MySqlCommand(query, mySqlConnection))
-                {
-                    myReader = mycommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    mySqlConnection.Close();
-                }
-            }
-            return new JsonResult(table);
-        }
-        [HttpPost]
-        public JsonResult Post()
-        {
-            sdasd
-        }
+        
     }
 }
